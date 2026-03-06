@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ═══════════════════════════════════════════════════════════════════
+     CalcBharat Sitemap
+     Site      : https://calcbharat.org/
+     Generated : 2026-03-06
+     Total URLs: 80
+     Sections  : Homepage | Financial Calculators (34) | Numerology (40) | Static Pages
+═══════════════════════════════════════════════════════════════════ -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- ═══ HOMEPAGE ═══ -->
+
+  <url>
+    <loc>https://calcbharat.org/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <!-- CalcBharat - Free Financial & Numerology Calculators India -->
+  </url>
+
+
+  <!-- ═══ SECTION & STATIC PAGES ═══ -->
+
+  <url>
+    <loc>https://calcbharat.org/financial-calculators/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <!-- Free Financial Calculators India FY 2025-26 -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <!-- Free Numerology Calculators India - Life Path Lucky Number -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/about/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.50</priority>
+    <!-- About CalcBharat -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/privacy-policy/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+    <!-- Privacy Policy - CalcBharat -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/disclaimer/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+    <!-- Disclaimer - CalcBharat -->
+  </url>
+
+
+  <!-- ═══ FINANCIAL CALCULATORS — 34 URLs ═══ -->
+
+  <url>
+    <loc>https://calcbharat.org/calculator/income-tax-calculator-fy-2025-26/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <!-- Income Tax Calculator FY 2025-26 - Old vs New Regime -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/sip-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <!-- SIP Calculator India - Monthly SIP & Step-Up SIP Returns -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/home-loan-emi-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <!-- Home Loan EMI Calculator India 2025 -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/gst-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <!-- GST Calculator India - Add Remove GST 5% 12% 18% 28% -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/ppf-calculator-fy-2025-26/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <!-- PPF Calculator FY 2025-26 - 7.1% Interest Rate -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/epf-calculator-fy-2025-26/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <!-- EPF Calculator FY 2025-26 - 8.15% Interest Rate -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/ssy-calculator-fy-2025-26/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Sukanya Samriddhi Yojana Calculator 8.2% FY 2025-26 -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/scss-calculator-fy-2025-26/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- SCSS Calculator Senior Citizen Savings Scheme 8.2% -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/nsc-calculator-fy-2025-26/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- NSC Calculator National Savings Certificate 7.7% -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/kvp-calculator-fy-2025-26/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- KVP Calculator Kisan Vikas Patra 7.5% Double Money -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/post-office-mis-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Post Office MIS Calculator Monthly Income Scheme 7.4% -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/nps-calculator-fy-2025-26/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- NPS Calculator FY 2025-26 - 80CCD Tax Benefit -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/fd-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- FD Calculator - Fixed Deposit Maturity Calculator India -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/rd-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- RD Calculator - Recurring Deposit Maturity India -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/capital-gains-tax-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Capital Gains Tax Calculator FY 2025-26 - LTCG STCG -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/hra-calculator-fy-2025-26/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- HRA Exemption Calculator FY 2025-26 India -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/tds-calculator-fy-2025-26/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- TDS Calculator FY 2025-26 - Section 192 194A 194I 194J -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/elss-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- ELSS Calculator - Tax Saving Mutual Fund 80C Returns -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/80c-deduction-planner/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- 80C Deduction Planner FY 2025-26 - Maximize Tax Saving -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/lumpsum-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Lumpsum Investment Calculator India - One-Time SIP -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/swp-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- SWP Calculator - Systematic Withdrawal Plan India -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/mutual-fund-returns-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Mutual Fund Returns Calculator - CAGR Calculator India -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/compound-interest-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Compound Interest Calculator India - CI Formula -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/simple-interest-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <!-- Simple Interest Calculator India - SI Formula -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/personal-loan-emi-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Personal Loan EMI Calculator India 2025 -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/car-loan-emi-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Car Loan EMI Calculator India 2025 -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/credit-card-emi-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Credit Card EMI Calculator India - Conversion Cost -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/business-loan-emi-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Business Loan EMI Calculator MSME India -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/loan-eligibility-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Loan Eligibility Calculator India - Max Loan Amount FOIR -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/fire-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- FIRE Calculator India - Financial Independence Retire Early -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/retirement-planner/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Retirement Planner India - Inflation Adjusted Corpus -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/salary-breakup-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Salary Breakup Calculator CTC to In-Hand FY 2025-26 -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/gratuity-calculator-fy-2025-26/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Gratuity Calculator FY 2025-26 - Formula & Tax Exemption -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/calculator/inflation-calculator-india/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <!-- Inflation Calculator India - Purchasing Power Decline -->
+  </url>
+
+
+  <!-- ═══ NUMEROLOGY CALCULATORS — 40 URLs ═══ -->
+
+  <url>
+    <loc>https://calcbharat.org/numerology/life-path-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <!-- Life Path Number Calculator - Free Numerology 2025 -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/destiny-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Destiny Expression Number Calculator - Free Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/soul-urge-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Soul Urge Heart's Desire Number Calculator -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/personality-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Personality Number Calculator - Free Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/birthday-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Birthday Number Calculator - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/maturity-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Maturity Number Calculator - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/attitude-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Attitude Number Calculator - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/personal-year-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Personal Year Number Calculator 2025 - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/personal-month-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Personal Month Number Calculator - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/personal-day-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <!-- Personal Day Number Calculator - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/pinnacle-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Pinnacle Number Calculator - 4 Life Phases Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/challenge-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Challenge Number Calculator - Life Obstacles Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/full-name-numerology-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <!-- Full Name Numerology Calculator - All Numbers Free -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/name-compatibility-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Name Compatibility Calculator - Numerology Score -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/name-correction-numerology/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Name Correction Numerology Calculator - Align Your Name -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/baby-name-numerology-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Baby Name Numerology Calculator India - Best Name -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/business-name-numerology-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Business Name Numerology Calculator - Lucky Name -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/hidden-passion-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Hidden Passion Number Calculator - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/balance-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <!-- Balance Number Calculator - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/cornerstone-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <!-- Cornerstone Number Calculator - First Letter Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/capstone-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <!-- Capstone Number Calculator - Last Letter Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/karmic-debt-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Karmic Debt Number Calculator - 13 14 16 19 Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/karmic-lesson-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Karmic Lesson Number Calculator - Missing Numbers -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/lucky-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <!-- Lucky Number Calculator - Free Numerology India -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/lucky-color-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Lucky Color Calculator by Date of Birth - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/lucky-day-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Lucky Day Calculator by Date of Birth - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/lucky-direction-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Lucky Direction Calculator - Vastu + Numerology India -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/lucky-career-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Lucky Career Calculator by Life Path Number -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/phone-number-numerology-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Phone Number Numerology Calculator - Mobile Vibration -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/mobile-number-lucky-checker/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <!-- Mobile Number Lucky Checker - Is Your Number Lucky? -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/vehicle-number-numerology-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Vehicle Number Numerology Calculator India -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/house-number-numerology-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- House Number Numerology Calculator - Home Energy -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/relationship-compatibility-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Relationship Compatibility Calculator - Numerology Score -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/marriage-compatibility-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <!-- Marriage Compatibility Calculator - Numerology India -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/friendship-compatibility-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <!-- Friendship Compatibility Calculator - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/lo-shu-grid-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <!-- Lo Shu Grid Calculator - Free Birth Date Grid Online -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/subconscious-self-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <!-- Subconscious Self Number Calculator - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/rational-thought-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <!-- Rational Thought Number Calculator - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/expression-bridge-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <!-- Expression Bridge Number Calculator - Numerology -->
+  </url>
+
+  <url>
+    <loc>https://calcbharat.org/numerology/soul-urge-bridge-number-calculator/</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <!-- Soul Urge Bridge Number Calculator - Numerology -->
+  </url>
+
+
+</urlset>
