@@ -1,0 +1,129 @@
+# ═══════════════════════════════════════════════════════════════
+# CalcBharat — robots.txt
+# Site     : https://calcbharat.org/
+# Updated  : 2026-03-06
+# Sections : Financial Calculators (FY 2025-26) + Numerology Calculators (40+)
+# ═══════════════════════════════════════════════════════════════
+
+# ── Default: All crawlers ────────────────────────────────────────
+User-agent: *
+Allow: /
+Allow: /calculator/
+Allow: /numerology/
+Allow: /financial-calculators/
+Allow: /about/
+Allow: /privacy-policy/
+Allow: /disclaimer/
+
+# Block CMS / admin paths
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /api/
+Disallow: /private/
+Disallow: /cdn-cgi/
+
+# Block tracking & session URL params
+Disallow: /*?utm_source=
+Disallow: /*?utm_medium=
+Disallow: /*?utm_campaign=
+Disallow: /*?fbclid=
+Disallow: /*?gclid=
+Disallow: /*?ref=
+Disallow: /*?session=
+Disallow: /*?source=
+
+# ── Google ───────────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+Allow: /calculator/
+Allow: /numerology/
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.webp
+Allow: /og-image.png
+
+# ── Google AI (Gemini) ───────────────────────────────────────────
+# Allowing AI indexing improves AEO (Answer Engine Optimization)
+User-agent: Google-Extended
+Allow: /
+
+# ── Bing ─────────────────────────────────────────────────────────
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# ── DuckDuckGo ───────────────────────────────────────────────────
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 2
+
+# ── ChatGPT / OpenAI ─────────────────────────────────────────────
+# Allowing GPTBot helps CalcBharat appear in ChatGPT answers
+User-agent: GPTBot
+Allow: /
+Allow: /calculator/
+Allow: /numerology/
+
+# ── Perplexity AI ────────────────────────────────────────────────
+# Perplexity uses content for real-time AI answers (AEO value)
+User-agent: PerplexityBot
+Allow: /
+
+# ── Anthropic Claude ─────────────────────────────────────────────
+User-agent: ClaudeBot
+Allow: /
+
+# ── Apple ────────────────────────────────────────────────────────
+User-agent: Applebot
+Allow: /
+Crawl-delay: 2
+
+# ── Common Crawl (AI training datasets) ──────────────────────────
+User-agent: CCBot
+Allow: /
+
+# ── SEO tools — rate limited ─────────────────────────────────────
+User-agent: AhrefsBot
+Allow: /
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Allow: /
+Crawl-delay: 10
+
+User-agent: MajesticSEO
+Allow: /
+Crawl-delay: 10
+
+User-agent: PetalBot
+Allow: /
+Crawl-delay: 5
+
+# ── Block low-value / spam bots ──────────────────────────────────
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: SeznamBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+# ── Sitemaps ─────────────────────────────────────────────────────
+Sitemap: https://calcbharat.org/sitemap.xml
+
+# ── Preferred domain ─────────────────────────────────────────────
+Host: https://calcbharat.org
