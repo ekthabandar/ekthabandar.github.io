@@ -785,12 +785,632 @@ footer { position:relative; z-index:1; border-top:1px solid var(--border); paddi
   </div>
 </footer>
 
+<script>
+
+// ═══════════════════════════════════════════════════════════════════
+//  NUMEROLOGY CALCBHARAT — FULL JS ENGINE
+//  Pythagorean + Chaldean | 40 calculators | Deep interpretations
+// ═══════════════════════════════════════════════════════════════════
+
+// ── SYSTEM STATE ────────────────────────────────────────────────────────────
+let activeSystem = 'pythagorean';
+let activeFilter = 'all';
+
+function setSystem(sys, btn) {
+  activeSystem = sys;
+  document.querySelectorAll('.sys-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── LETTER VALUES ────────────────────────────────────────────────────────────
+const PYTH_MAP = {A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8};
+const CHALD_MAP = {A:1,B:2,C:3,D:4,E:5,F:8,G:3,H:5,I:1,J:1,K:2,L:3,M:4,N:5,O:7,P:8,Q:1,R:2,S:3,T:4,U:6,V:6,W:6,X:5,Y:1,Z:7};
+
+function letterVal(ch, system) {
+  const map = system === 'chaldean' ? CHALD_MAP : PYTH_MAP;
+  return map[ch.toUpperCase()] || 0;
+}
+function vowelVal(ch, system) { return 'AEIOU'.includes(ch.toUpperCase()) ? letterVal(ch, system) : 0; }
+function consonantVal(ch, system) { return (!'AEIOU '.includes(ch.toUpperCase())) ? letterVal(ch, system) : 0; }
+
+// ── REDUCTION ───────────────────────────────────────────────────────────────
+function reduceNum(n) {
+  while (n > 9 && n !== 11 && n !== 22 && n !== 33) {
+    n = String(n).split('').reduce((a, d) => a + +d, 0);
+  }
+  return n;
+}
+function reduceNoMaster(n) {
+  while (n > 9) { n = String(n).split('').reduce((a, d) => a + +d, 0); }
+  return n;
+}
+function digitSum(s) { return [...String(s)].reduce((a, c) => a + (+c || 0), 0); }
+function nameToNum(name, system) {
+  return reduceNum([...name.toUpperCase().replace(/[^A-Z]/g, '')].reduce((a, c) => a + letterVal(c, system), 0));
+}
+function nameVowelNum(name, system) {
+  return reduceNum([...name.toUpperCase().replace(/[^A-Z]/g, '')].reduce((a, c) => a + vowelVal(c, system), 0) || 1);
+}
+function nameConsonantNum(name, system) {
+  return reduceNum([...name.toUpperCase().replace(/[^A-Z]/g, '')].reduce((a, c) => a + consonantVal(c, system), 0) || 1);
+}
+function dobToLP(dob) {
+  const [y, m, d] = dob.split('-').map(Number);
+  return reduceNum(reduceNum(d) + reduceNum(m) + reduceNum(digitSum(y)));
+}
+
+// ── DEEP MEANINGS ────────────────────────────────────────────────────────────
+const DEEP = {
+  1: {
+    title: 'The Leader', archetype: 'Pioneer & Originator',
+    overview: 'Number 1 is the first vibration — the spark of creation, the self, the individual. People with a strong 1 energy are born leaders who forge their own path with confidence and originality. They are driven by a powerful need to be first, to achieve, and to stand apart from the crowd.',
+    strengths: ['Natural leadership ability', 'Strong willpower and determination', 'Original, creative thinking', 'Self-sufficient and independent', 'Courageous in facing new challenges'],
+    weaknesses: ['Can become domineering or self-centred', 'Struggles to accept help from others', 'May be impulsive or overly stubborn', 'Difficulty working in teams'],
+    careers: ['Entrepreneur', 'CEO / Executive', 'Military Officer', 'Inventor', 'Politician', 'Surgeon', 'Pioneer Scientist'],
+    luckyNums: [1, 10, 19, 28], luckyDays: ['Sunday', 'Monday'], luckyColors: [{name:'Gold',hex:'#F59E0B'},{name:'Orange',hex:'#F97316'},{name:'Yellow',hex:'#EAB308'}],
+    luckyGems: 'Ruby, Garnet', planet: '☀️ Sun', compatibility: [1,3,5,9], advice: 'Guard against arrogance. Your greatest growth comes when you learn to collaborate without losing your independence.',
+    traits: ['Independent','Ambitious','Pioneering','Original','Self-reliant']
+  },
+  2: {
+    title: 'The Diplomat', archetype: 'Peacemaker & Partner',
+    overview: 'Number 2 is the vibration of duality, relationship, and cooperation. Where 1 is the individual, 2 is the partnership. People with strong 2 energy are highly intuitive, empathetic, and gifted at sensing the needs of others. They find purpose in collaboration and harmony rather than solo achievement.',
+    strengths: ['Exceptional empathy and sensitivity', 'Natural diplomacy and mediation skills', 'Deeply loyal and supportive', 'Highly intuitive, almost psychic', 'Excellent listener and peacekeeper'],
+    weaknesses: ['Can be over-sensitive to criticism', 'Indecisive when alone', 'May give too much and neglect self', 'Can become passive-aggressive'],
+    careers: ['Counsellor', 'Social Worker', 'Diplomat', 'Musician', 'Teacher', 'Nurse', 'Mediator', 'Artist'],
+    luckyNums: [2, 11, 20, 29], luckyDays: ['Monday', 'Friday'], luckyColors: [{name:'Silver',hex:'#94A3B8'},{name:'White',hex:'#F8FAFC'},{name:'Pale Blue',hex:'#BAE6FD'}],
+    luckyGems: 'Pearl, Moonstone', planet: '🌙 Moon', compatibility: [2,4,6,8], advice: 'Learn to voice your needs directly. Your sensitivity is a superpower — protect it by setting healthy boundaries.',
+    traits: ['Cooperative','Sensitive','Intuitive','Balanced','Peacemaker']
+  },
+  3: {
+    title: 'The Communicator', archetype: 'Creative & Joyful',
+    overview: 'Number 3 is the vibration of self-expression, creativity, and joy. It combines the independence of 1 with the partnership of 2 to produce something entirely new — creative self-expression. Number 3 people are natural communicators, storytellers, and entertainers with an infectious joie de vivre.',
+    strengths: ['Exceptional creativity and artistic talent', 'Brilliant communication and storytelling', 'Magnetic social presence', 'Optimistic, uplifting, and inspiring', 'Quick mind, witty and humorous'],
+    weaknesses: ['Can scatter energy across too many projects', 'Prone to exaggeration and superficiality', 'May avoid deep emotional work', 'Can be moody when creativity is blocked'],
+    careers: ['Writer', 'Performer / Actor', 'Designer', 'Comedian', 'Marketing Professional', 'Public Speaker', 'Journalist', 'Musician'],
+    luckyNums: [3, 12, 21, 30], luckyDays: ['Thursday', 'Tuesday'], luckyColors: [{name:'Yellow',hex:'#EAB308'},{name:'Purple',hex:'#A855F7'},{name:'Pink',hex:'#EC4899'}],
+    luckyGems: 'Topaz, Amethyst', planet: '♃ Jupiter', compatibility: [1,3,5,9], advice: 'Focus your abundant creative energy. Depth matters more than breadth — complete what you start.',
+    traits: ['Creative','Expressive','Social','Optimistic','Artistic']
+  },
+  4: {
+    title: 'The Builder', archetype: 'Foundation & Structure',
+    overview: 'Number 4 is the vibration of earth, stability, and construction. While others dream, Number 4 builds. These individuals are the backbone of society — hardworking, reliable, systematic, and deeply committed to creating lasting structures whether in business, family, or institutions.',
+    strengths: ['Exceptional organisation and planning ability', 'Extremely reliable and trustworthy', 'Strong work ethic and discipline', 'Methodical, detail-oriented thinker', 'Builds things that stand the test of time'],
+    weaknesses: ['Can be overly rigid and resistant to change', 'May become a workaholic', 'Struggles with spontaneity', 'Can appear cold or overly serious'],
+    careers: ['Engineer', 'Architect', 'Accountant', 'Project Manager', 'Builder', 'Military', 'Finance Professional', 'IT Systems Analyst'],
+    luckyNums: [4, 13, 22, 31], luckyDays: ['Saturday', 'Sunday'], luckyColors: [{name:'Grey',hex:'#6B7280'},{name:'Brown',hex:'#92400E'},{name:'Blue',hex:'#3B82F6'}],
+    luckyGems: 'Blue Sapphire, Hessonite', planet: '🜄 Rahu', compatibility: [2,4,6,8], advice: 'Embrace flexibility. The most enduring structures have some give — perfection lies in resilience, not rigidity.',
+    traits: ['Practical','Disciplined','Reliable','Hardworking','Systematic']
+  },
+  5: {
+    title: 'The Adventurer', archetype: 'Freedom & Change',
+    overview: 'Number 5 is the vibration of freedom, sensory experience, and constant change. These souls incarnated to experience everything life has to offer — they cannot be caged by routine, rules, or repetition. Number 5 is the most dynamic and versatile of all vibrations, and these people are quick-witted, magnetic, and adaptable.',
+    strengths: ['Highly adaptable and resourceful', 'Quick, versatile intelligence', 'Magnetic charisma and social ease', 'Fearless in trying new things', 'Progressive, forward-thinking mindset'],
+    weaknesses: ['Easily bored — commitment can be difficult', 'May be restless, anxious, or impulsive', 'Can overindulge in pleasure or excess', 'Inconsistency in follow-through'],
+    careers: ['Journalist', 'Travel Blogger', 'Sales Professional', 'Entrepreneur', 'Pilot', 'Promoter', 'Consultant', 'Digital Nomad'],
+    luckyNums: [5, 14, 23], luckyDays: ['Wednesday', 'Friday'], luckyColors: [{name:'Green',hex:'#22C55E'},{name:'Turquoise',hex:'#14B8A6'},{name:'Silver',hex:'#94A3B8'}],
+    luckyGems: 'Emerald, Green Tourmaline', planet: '☿ Mercury', compatibility: [1,3,5,7], advice: 'Channel your restlessness into purposeful exploration. Freedom is most meaningful when it is chosen, not escaped to.',
+    traits: ['Freedom-loving','Versatile','Curious','Dynamic','Adaptable']
+  },
+  6: {
+    title: 'The Nurturer', archetype: 'Love, Family & Service',
+    overview: 'Number 6 is the vibration of love, home, responsibility, and service. These are the caregivers of the world — deeply devoted to family and community, with a powerful aesthetic sensibility and an innate need to create beauty and harmony in their surroundings. Number 6 is the most balanced and stable vibration.',
+    strengths: ['Deeply loving, loyal, and devoted', 'Natural healer and counsellor', 'Strong aesthetic and creative sense', 'Responsible and dependable', 'Creates beauty and harmony around them'],
+    weaknesses: ['Can become over-protective or controlling', 'Prone to martyrdom and self-sacrifice', 'May become smothering in relationships', 'Can be overly idealistic and disappointed'],
+    careers: ['Doctor', 'Teacher', 'Counsellor', 'Interior Designer', 'Chef', 'Social Worker', 'Yoga/Wellness Teacher', 'Hospitality'],
+    luckyNums: [6, 15, 24], luckyDays: ['Friday', 'Monday'], luckyColors: [{name:'Rose Pink',hex:'#FDA4AF'},{name:'Blue',hex:'#60A5FA'},{name:'Indigo',hex:'#6366F1'}],
+    luckyGems: 'Diamond, White Sapphire', planet: '♀ Venus', compatibility: [2,4,6,9], advice: 'Practice self-care first. You cannot pour love endlessly from an empty vessel — your needs matter as much as others\'.',
+    traits: ['Caring','Responsible','Loving','Harmonious','Family-oriented']
+  },
+  7: {
+    title: 'The Seeker', archetype: 'Wisdom & Inner Truth',
+    overview: 'Number 7 is the vibration of the mystic and the philosopher — the eternal seeker of truth. These are the deep thinkers, researchers, and spiritual explorers of numerology. Number 7 is drawn to solitude, analysis, and the hidden mysteries beneath the surface of life. It is the most spiritually inclined of the single-digit numbers.',
+    strengths: ['Exceptionally analytical and perceptive', 'Deep, original thinker', 'Strong intuition and spiritual insight', 'Persistent researcher and truth-seeker', 'Dignified and wise presence'],
+    weaknesses: ['Can become isolated or antisocial', 'May come across as cold or aloof', 'Prone to scepticism or cynicism', 'Perfectionism can cause paralysis'],
+    careers: ['Scientist', 'Researcher', 'Philosopher', 'Psychologist', 'Astrologer', 'Data Analyst', 'IT Developer', 'Spiritual Teacher'],
+    luckyNums: [7, 16, 25], luckyDays: ['Sunday', 'Monday'], luckyColors: [{name:'Violet',hex:'#8B5CF6'},{name:'Grey',hex:'#6B7280'},{name:'White',hex:'#F8FAFC'}],
+    luckyGems: 'Cat\'s Eye, Labradorite', planet: '☽ Ketu', compatibility: [1,2,5,7], advice: 'Bridge your inner world with the outer. Share your insights — the world needs your depth.',
+    traits: ['Analytical','Spiritual','Introspective','Wise','Private']
+  },
+  8: {
+    title: 'The Powerhouse', archetype: 'Power, Abundance & Authority',
+    overview: 'Number 8 is the vibration of material mastery, power, and abundance. This is the number of the executive, the business builder, and the authority figure. Number 8 understands money, power, and the systems that govern the material world like no other number. The symbol itself (∞ rotated) represents infinite cycles of give and receive.',
+    strengths: ['Exceptional business acumen and leadership', 'Strong organisational and executive ability', 'Resilient — bounces back from setbacks', 'Natural financial intelligence', 'Commands respect and authority'],
+    weaknesses: ['Can become obsessed with power or money', 'Workaholic tendencies', 'May steamroll others in pursuit of goals', 'Can be controlling or inflexible'],
+    careers: ['CEO / Business Owner', 'Banker', 'Real Estate Developer', 'Lawyer', 'Judge', 'Politician', 'Surgeon', 'Finance Director'],
+    luckyNums: [8, 17, 26], luckyDays: ['Saturday', 'Sunday'], luckyColors: [{name:'Black',hex:'#1F2937'},{name:'Dark Blue',hex:'#1E3A5F'},{name:'Brown',hex:'#78350F'}],
+    luckyGems: 'Blue Sapphire, Amethyst', planet: '♄ Saturn', compatibility: [2,4,6,8], advice: 'Material mastery is your gift. Use it in service. The greatest leaders know that true power comes from empowering others.',
+    traits: ['Ambitious','Authoritative','Successful','Executive','Resilient']
+  },
+  9: {
+    title: 'The Humanitarian', archetype: 'Universal Love & Completion',
+    overview: 'Number 9 is the highest single-digit vibration — the number of completion, wisdom, and universal love. It contains all the qualities of numbers 1 through 8, giving those with strong 9 energy a deep understanding of all human experience. Number 9 is the born humanitarian, the compassionate sage, and the bridge between the personal and the universal.',
+    strengths: ['Boundless compassion and generosity', 'Broad, inclusive, universal perspective', 'Natural wisdom from lived experience', 'Creative and artistically gifted', 'Inspiring and magnetic presence'],
+    weaknesses: ['Can become emotionally overwhelmed', 'Difficulty letting go of past hurts', 'May be naive about human nature', 'Can scatter energy in too many directions'],
+    careers: ['Humanitarian / NGO Leader', 'Doctor', 'Spiritual Leader', 'Artist', 'Philosopher', 'Teacher', 'Healer', 'Diplomat', 'Film Director'],
+    luckyNums: [9, 18, 27], luckyDays: ['Tuesday', 'Thursday'], luckyColors: [{name:'Red',hex:'#EF4444'},{name:'Crimson',hex:'#DC2626'},{name:'Gold',hex:'#F59E0B'}],
+    luckyGems: 'Coral, Red Garnet', planet: '♂ Mars', compatibility: [1,3,6,9], advice: 'Your path is one of letting go. Release what no longer serves — your greatest gifts flow through you, not from you.',
+    traits: ['Compassionate','Generous','Idealistic','Global-minded','Wise']
+  },
+  11: {
+    title: 'The Intuitive (Master)', archetype: 'Spiritual Messenger',
+    overview: 'Master Number 11 is the most spiritually charged of all numbers. Called the "Psychic Master" or "Illuminator", those with an 11 Life Path are old souls who carry an intense inner knowing — a direct line to higher consciousness. This is one of the most challenging numbers to live, as the sensitivity and awareness can be overwhelming without proper grounding.',
+    strengths: ['Extraordinarily high intuition, near-psychic', 'Ability to inspire and uplift others', 'Visionary perception beyond ordinary reality', 'Charismatic and magnetic presence', 'Bridge between spiritual and material worlds'],
+    weaknesses: ['Extreme sensitivity can cause anxiety', 'Self-doubt and fear of failure', 'Can feel chronically misunderstood', 'May alternate between confidence and insecurity'],
+    careers: ['Spiritual Teacher', 'Psychologist', 'Inventor', 'Visionary Artist', 'Healer', 'Counsellor', 'Channeller', 'Inspirational Speaker'],
+    luckyNums: [11, 2, 29], luckyDays: ['Monday', 'Wednesday'], luckyColors: [{name:'Silver',hex:'#94A3B8'},{name:'White',hex:'#F8FAFC'},{name:'Electric Blue',hex:'#3B82F6'}],
+    luckyGems: 'Moonstone, Clear Quartz', planet: '🌙 Moon (elevated)', compatibility: [2,4,11,22], advice: 'Ground your visions in practical action. The world needs your light made tangible — write it, build it, share it.',
+    traits: ['Psychic','Inspiring','Idealistic','Visionary','Sensitive']
+  },
+  22: {
+    title: 'The Master Builder', archetype: 'Cosmic Architect',
+    overview: 'Master Number 22 is the most powerful of all numbers — the Master Builder who can turn the most ambitious visions into tangible reality. These individuals have the intuition of the 11 combined with the practical, grounded energy of the 4, giving them an unparalleled capacity to build lasting structures that serve humanity on a grand scale.',
+    strengths: ['Vision combined with practical execution', 'Ability to build systems of lasting impact', 'Diplomatic and masterful in leadership', 'Can work effectively at every scale', 'Bridges the spiritual and material perfectly'],
+    weaknesses: ['The weight of potential can be paralysing', 'Extreme pressure to live up to capability', 'Can become controlling in pursuit of vision', 'May neglect personal life for grand goals'],
+    careers: ['World Leader', 'Visionary Entrepreneur', 'Architect', 'UN Officer', 'Institution Founder', 'Major NGO Director', 'Tech Visionary'],
+    luckyNums: [22, 4, 40], luckyDays: ['Saturday', 'Sunday'], luckyColors: [{name:'Gold',hex:'#F59E0B'},{name:'Cream',hex:'#FEF3C7'},{name:'Deep Blue',hex:'#1E40AF'}],
+    luckyGems: 'Blue Sapphire, Diamond', planet: '♄ Saturn (Master)', compatibility: [2,4,8,22], advice: 'You are capable of extraordinary things — trust the vision. Break it into steps. The world is literally waiting for what you can build.',
+    traits: ['Visionary','Powerful','Disciplined','Legendary','Practical']
+  },
+  33: {
+    title: 'The Master Teacher', archetype: 'Universal Healer',
+    overview: 'Master Number 33 is the rarest Life Path of all — the Master Teacher, sometimes called the Christ Vibration. These extraordinary souls dedicate their lives to uplifting humanity through selfless love and healing wisdom. The number 33 only truly manifests when it appears as the final result of the Life Path calculation (not as an intermediate step).',
+    strengths: ['Radiates unconditional love and compassion', 'Profound healing ability', 'Master of nurturing and emotional support', 'Deep spiritual devotion and selflessness', 'Ability to inspire collective transformation'],
+    weaknesses: ['Tendency to over-sacrifice to point of depletion', 'Sets impossibly high spiritual standards', 'Can attract those who take advantage of generosity', 'May deny own needs until crisis'],
+    careers: ['Spiritual Leader', 'Healer / Doctor', 'Humanitarian Founder', 'Therapist', 'Religious Teacher', 'Artist with healing mission'],
+    luckyNums: [33, 6, 24], luckyDays: ['Friday', 'Monday'], luckyColors: [{name:'Indigo',hex:'#4F46E5'},{name:'Rose Gold',hex:'#FDA4AF'},{name:'White',hex:'#F8FAFC'}],
+    luckyGems: 'Diamond, Rose Quartz, Amethyst', planet: '♀ Venus (elevated)', compatibility: [3,6,9,33], advice: 'Master your own foundation first. You cannot teach unconditional love if you are depleted. Self-love is your first spiritual practice.',
+    traits: ['Loving','Selfless','Healing','Uplifting','Devoted']
+  }
+};
+
+function getInterp(n) { return DEEP[n] || DEEP[reduceNoMaster(n)] || DEEP[1]; }
+
+// ── RESULT RENDERER ────────────────────────────────────────────────────────────
+function showResult(containerId, number, label, extraHTML = '') {
+  const d = getInterp(number);
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.style.display = 'block';
+
+  const strengthPills = d.strengths.map(s => `<span class="trait-pill strength">${s}</span>`).join('');
+  const weakPills = d.weaknesses.map(w => `<span class="trait-pill weakness">${w}</span>`).join('');
+  const careerPills = d.careers.map(c => `<span class="career-pill">${c}</span>`).join('');
+  const colorDots = d.luckyColors.map(c => `<span class="color-swatch" style="background:${c.hex}"></span>${c.name}`).join(' · ');
+  const traitPills = d.traits.map(t => `<span class="trait-pill">${t}</span>`).join('');
+
+  el.innerHTML = `
+    <div class="result-number-display">
+      <span class="rnd-num">${number}</span>
+      <span class="rnd-label">${label}</span>
+      <span class="rnd-title">${d.title} — ${d.archetype}</span>
+    </div>
+    
+    ${extraHTML}
+    
+    <div class="interp-tabs">
+      <button class="itab active" onclick="showTab(this,'overview_${containerId}')">Overview</button>
+      <button class="itab" onclick="showTab(this,'strengths_${containerId}')">Strengths</button>
+      <button class="itab" onclick="showTab(this,'career_${containerId}')">Career</button>
+      <button class="itab" onclick="showTab(this,'lucky_${containerId}')">Lucky</button>
+      <button class="itab" onclick="showTab(this,'advice_${containerId}')">Advice</button>
+    </div>
+    
+    <div id="overview_${containerId}" class="itab-panel show">
+      <div class="interp-text">${d.overview}</div>
+      <div class="interp-heading">Core Traits</div>
+      <div class="trait-pills">${traitPills}</div>
+    </div>
+    <div id="strengths_${containerId}" class="itab-panel">
+      <div class="interp-heading">Strengths</div>
+      ${d.strengths.map(s=>`<div class="m-strength-row">${s}</div>`).join('')}
+      <div class="interp-heading" style="margin-top:.75rem;">Challenges to Overcome</div>
+      ${d.weaknesses.map(w=>`<div class="m-weakness-row">${w}</div>`).join('')}
+    </div>
+    <div id="career_${containerId}" class="itab-panel">
+      <div class="interp-heading">Ideal Career Paths</div>
+      <div class="career-pills">${careerPills}</div>
+    </div>
+    <div id="lucky_${containerId}" class="itab-panel">
+      <div class="lucky-grid">
+        <div class="lucky-item"><div class="lucky-item-label">Lucky Numbers</div><div class="lucky-item-val">${d.luckyNums.join(', ')}</div></div>
+        <div class="lucky-item"><div class="lucky-item-label">Lucky Days</div><div class="lucky-item-val">${d.luckyDays.join(', ')}</div></div>
+        <div class="lucky-item"><div class="lucky-item-label">Lucky Colors</div><div class="lucky-item-val" style="font-size:.75rem">${colorDots}</div></div>
+        <div class="lucky-item"><div class="lucky-item-label">Ruling Planet</div><div class="lucky-item-val">${d.planet}</div></div>
+        <div class="lucky-item"><div class="lucky-item-label">Lucky Gems</div><div class="lucky-item-val" style="font-size:.78rem">${d.luckyGems}</div></div>
+        <div class="lucky-item"><div class="lucky-item-label">Best Matches</div><div class="lucky-item-val">${d.compatibility.join(', ')}</div></div>
+      </div>
+    </div>
+    <div id="advice_${containerId}" class="itab-panel">
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:1rem;font-size:.85rem;color:var(--text);line-height:1.8;font-style:italic;">"${d.advice}"</div>
+    </div>
+  `;
+}
+
+function showTab(btn, panelId) {
+  const parent = btn.closest('.num-result') || btn.parentElement.parentElement;
+  parent.querySelectorAll('.itab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = document.getElementById(panelId);
+  if (panel) {
+    const container = panel.parentElement;
+    container.querySelectorAll('.itab-panel').forEach(p => p.classList.remove('show'));
+    panel.classList.add('show');
+  }
+}
+
+// ── SYSTEM BADGE ────────────────────────────────────────────────────────────
+function sysBadge() {
+  if (activeSystem === 'both') return `<div class="system-badge pyth">⚡ Pythagorean</div><div class="system-badge chald" style="display:inline-flex;gap:6px;margin-left:.5rem">🌙 Chaldean</div>`;
+  if (activeSystem === 'chaldean') return `<div class="system-badge chald">🌙 Chaldean System Active</div>`;
+  return `<div class="system-badge pyth">⚡ Pythagorean System Active</div>`;
+}
+
+// ── COMPARE HELPER ───────────────────────────────────────────────────────────
+function compareBlock(pNum, cNum, label) {
+  if (pNum === cNum) return `<div style="text-align:center;font-size:.8rem;color:var(--muted);padding:.5rem 0">Both systems agree: ${label} = <strong style="color:var(--purple2)">${pNum}</strong></div>`;
+  return `<div class="compare-box">
+    <div class="compare-col"><div class="compare-col-title pyth">Pythagorean</div><div style="font-family:'Cinzel',serif;font-size:2rem;color:var(--purple2)">${pNum}</div><div style="font-size:.7rem;color:var(--muted)">${getInterp(pNum).title}</div></div>
+    <div class="compare-col"><div class="compare-col-title chald">Chaldean</div><div style="font-family:'Cinzel',serif;font-size:2rem;color:var(--gold)">${cNum}</div><div style="font-size:.7rem;color:var(--muted)">${getInterp(cNum).title}</div></div>
+  </div>`;
+}
+
+// ── FORM HELPERS ────────────────────────────────────────────────────────────
+function fRow(fields) { return `<div class="form-row ${fields.length===1?'single':''}">${fields.join('')}</div>`; }
+function fText(id, label, ph = '') { return `<div class="form-group"><label>${label}</label><input id="${id}" type="text" placeholder="${ph}"></div>`; }
+function fDate(id, label, val = '1990-06-15') { return `<div class="form-group"><label>${label}</label><input id="${id}" type="date" value="${val}"></div>`; }
+function fBtn(label, fn) { return `<button class="calc-btn" onclick="${fn}">${label}</button>`; }
+function resDiv(id) { return `<div class="num-result" id="${id}" style="display:none;margin-top:1.25rem;"></div>`; }
+function getVal(id) { return (document.getElementById(id)||{}).value||''; }
+function getToday() { return new Date().toISOString().slice(0,10); }
+
+// ── CALCULATOR DEFINITIONS ────────────────────────────────────────────────────
+const CALCS = {
+
+  // ─── CORE NUMBERS ─────────────────────────────────────────────────────────
+  life_path: { title:'Life Path Number Calculator', icon:'🌟', cat:'core', desc:'Most important number — reveals your life purpose and destiny path.',
+    render:()=>`<p class="modal-subtitle">Your Life Path Number is calculated from your full birth date. It reveals your life purpose, natural talents, and the lessons you came to learn.</p>${sysBadge()}${fRow([fDate('lp_dob','Date of Birth')])}${fBtn('Calculate My Life Path','calc_life_path()')}${resDiv('lp_res')}`,
+    calc:()=>{ const dob=getVal('lp_dob'); if(!dob)return; const lp=dobToLP(dob);
+      if(activeSystem==='both'){const cp=dobToLP(dob);showResult('lp_res',cp,'Life Path (Pythagorean)');}
+      else showResult('lp_res',lp,'Life Path Number'); }
+  },
+
+  destiny: { title:'Destiny (Expression) Number', icon:'✨', cat:'core', desc:'Your full birth name reveals your destiny and natural talents.',
+    render:()=>`<p class="modal-subtitle">Your Destiny Number (also called Expression Number) is derived from your full birth name — the name on your birth certificate. It reveals what you are here to accomplish.</p>${sysBadge()}${fRow([fText('dest_name','Full Birth Name (as on birth certificate)','e.g. Rahul Kumar Sharma')])}${fBtn('Calculate Destiny Number','calc_destiny()')}${resDiv('dest_res')}`,
+    calc:()=>{ const n=getVal('dest_name'); if(!n.trim())return;
+      if(activeSystem==='both'){ const p=nameToNum(n,'pythagorean'),c=nameToNum(n,'chaldean'); document.getElementById('dest_res').style.display='block'; document.getElementById('dest_res').innerHTML=compareBlock(p,c,'Destiny Number'); showResult('dest_res',p,'Destiny Number (Pythagorean)');}
+      else showResult('dest_res',nameToNum(n,activeSystem),'Destiny Number'); }
+  },
+
+  soul_urge: { title:"Soul Urge (Heart's Desire) Number", icon:'💜', cat:'core', desc:"Vowels in your name reveal your deepest inner motivations.",
+    render:()=>`<p class="modal-subtitle">Your Soul Urge Number is calculated from the vowels in your full birth name. It reveals your deepest motivations, true desires, and what you genuinely want out of life — your inner compass.</p>${sysBadge()}${fRow([fText('su_name','Full Birth Name','e.g. Priya Mehta')])}${fBtn("Find My Soul's Desire",'calc_soul_urge()')}${resDiv('su_res')}`,
+    calc:()=>{ const n=getVal('su_name'); if(!n.trim())return; showResult('su_res',nameVowelNum(n,activeSystem==='chaldean'?'chaldean':'pythagorean'),"Soul Urge Number"); }
+  },
+
+  personality: { title:'Personality Number', icon:'🎭', cat:'core', desc:'Consonants reveal how others see you — your outer personality.',
+    render:()=>`<p class="modal-subtitle">Your Personality Number is derived from the consonants in your name. It describes the face you show the world — your outer personality and first impression.</p>${sysBadge()}${fRow([fText('per_name','Full Birth Name','e.g. Priya Mehta')])}${fBtn('Find My Personality Number','calc_personality()')}${resDiv('per_res')}`,
+    calc:()=>{ const n=getVal('per_name'); if(!n.trim())return; showResult('per_res',nameConsonantNum(n,activeSystem==='chaldean'?'chaldean':'pythagorean'),'Personality Number'); }
+  },
+
+  birthday: { title:'Birthday Number', icon:'🎂', cat:'core', desc:'The day you were born reveals a special natural gift.',
+    render:()=>`<p class="modal-subtitle">Your Birthday Number is simply the day of the month you were born, reduced to a single digit. It reveals a special gift or talent you were born with.</p>${fRow([fDate('bd_dob','Date of Birth')])}${fBtn('Find My Birthday Number','calc_birthday()')}${resDiv('bd_res')}`,
+    calc:()=>{ const dob=getVal('bd_dob'); if(!dob)return; const d=+dob.split('-')[2]; showResult('bd_res',reduceNum(d),'Birthday Number'); }
+  },
+
+  maturity: { title:'Maturity Number', icon:'🔮', cat:'core', desc:'Your Life Path + Destiny reveals the wisdom you grow into.',
+    render:()=>`<p class="modal-subtitle">The Maturity Number represents the self you are growing toward — the qualities that emerge in your 30s and 40s and fully bloom later in life. It is the sum of your Life Path and Destiny Numbers.</p>${fRow([fDate('mat_dob','Date of Birth'),fText('mat_name','Full Birth Name','e.g. Rahul Sharma')])}${fBtn('Calculate Maturity Number','calc_maturity()')}${resDiv('mat_res')}`,
+    calc:()=>{ const dob=getVal('mat_dob'),n=getVal('mat_name'); if(!dob||!n.trim())return; const lp=dobToLP(dob),dest=nameToNum(n,activeSystem==='chaldean'?'chaldean':'pythagorean'),mat=reduceNum(lp+dest); showResult('mat_res',mat,'Maturity Number',`<div style="display:flex;gap:.5rem;margin-bottom:1rem"><div class="extra-box"><strong>${lp}</strong><span>Life Path</span></div><div class="extra-box"><strong>${dest}</strong><span>Destiny</span></div><div class="extra-box"><strong>${mat}</strong><span>Maturity</span></div></div>`); }
+  },
+
+  attitude: { title:'Attitude Number', icon:'🌅', cat:'core', desc:'Day + Month of birth — how you project yourself to the world.',
+    render:()=>`<p class="modal-subtitle">Also called the Achievement Number, the Attitude Number (Day + Month reduced) reveals how you naturally approach life and first present yourself to others.</p>${fRow([fDate('att_dob','Date of Birth')])}${fBtn('Find My Attitude Number','calc_attitude()')}${resDiv('att_res')}`,
+    calc:()=>{ const dob=getVal('att_dob'); if(!dob)return; const [,m,d]=dob.split('-').map(Number); showResult('att_res',reduceNum(d+m),'Attitude Number'); }
+  },
+
+  // ─── PERSONAL CYCLES ──────────────────────────────────────────────────────
+  personal_year: { title:'Personal Year Number 2025', icon:'📅', cat:'cycles', desc:'Discover what energy and themes define your year.',
+    render:()=>`<p class="modal-subtitle">Your Personal Year Number reveals the dominant theme and energy for a given calendar year. It runs from January 1 to December 31. Enter your DOB and a year to see what that year held for you.</p>${fRow([fDate('py_dob','Date of Birth'),fText('py_yr','Year','e.g. 2025')])}${fBtn('Calculate Personal Year','calc_personal_year()')}${resDiv('py_res')}`,
+    calc:()=>{ const dob=getVal('py_dob'),yr=+(getVal('py_yr')||new Date().getFullYear()); if(!dob)return; const [,m,d]=dob.split('-').map(Number); const n=reduceNum(reduceNum(d)+reduceNum(m)+reduceNum(digitSum(yr))); showResult('py_res',n,`Personal Year ${yr} Number`); }
+  },
+
+  personal_month: { title:'Personal Month Number', icon:'🗓️', cat:'cycles', desc:'Monthly energy forecast based on your personal year.',
+    render:()=>`<p class="modal-subtitle">Your Personal Month Number = Personal Year + Calendar Month. It fine-tunes the annual energy into monthly guidance for decisions and actions.</p>${fRow([fDate('pm_dob','Date of Birth')])}${fBtn('Calculate This Month','calc_personal_month()')}${resDiv('pm_res')}`,
+    calc:()=>{ const dob=getVal('pm_dob'); if(!dob)return; const t=new Date(); const [,m,d]=dob.split('-').map(Number); const py=reduceNum(reduceNum(d)+reduceNum(m)+reduceNum(digitSum(t.getFullYear()))); const n=reduceNum(py+t.getMonth()+1); showResult('pm_res',n,`Personal Month (${t.toLocaleString('default',{month:'long'})}) Number`); }
+  },
+
+  personal_day: { title:'Personal Day Number', icon:'🌞', cat:'cycles', desc:"Today's numerological vibration for your daily guidance.",
+    render:()=>`<p class="modal-subtitle">Your Personal Day Number = Personal Month + Calendar Day. It provides daily guidance on the most favourable actions, decisions, and energies for each day.</p>${fRow([fDate('pd_dob','Date of Birth')])}${fBtn("Calculate Today's Number",'calc_personal_day()')}${resDiv('pd_res')}`,
+    calc:()=>{ const dob=getVal('pd_dob'); if(!dob)return; const t=new Date(); const [,m,d]=dob.split('-').map(Number); const py=reduceNum(reduceNum(d)+reduceNum(m)+reduceNum(digitSum(t.getFullYear()))); const pmo=reduceNum(py+t.getMonth()+1); const n=reduceNum(pmo+t.getDate()); showResult('pd_res',n,`Personal Day (${t.toLocaleDateString('en-IN')}) Number`); }
+  },
+
+  pinnacle: { title:'Pinnacle Numbers (4 Phases)', icon:'🏔️', cat:'cycles', desc:'Your four life phases and the dominant energy of each.',
+    render:()=>`<p class="modal-subtitle">Pinnacle Numbers reveal the four major chapters of your life — the dominant themes and opportunities in each phase. The timing depends on your Life Path Number.</p>${fRow([fDate('pin_dob','Date of Birth')])}${fBtn('Calculate My Pinnacles','calc_pinnacle()')}${resDiv('pin_res')}`,
+    calc:()=>{ const dob=getVal('pin_dob'); if(!dob)return; const [y,m,d]=dob.split('-').map(Number); const lp=reduceNum(reduceNum(d)+reduceNum(m)+reduceNum(digitSum(y))); const p1=reduceNum(reduceNum(d)+reduceNum(m)),p2=reduceNum(reduceNum(d)+reduceNum(digitSum(y))),p3=reduceNum(p1+p2),p4=reduceNum(reduceNum(m)+reduceNum(digitSum(y))); const cy1=36-lp,cy2=cy1+9,cy3=cy2+9; document.getElementById('pin_res').style.display='block'; document.getElementById('pin_res').innerHTML=`<div class="extra-grid"><div class="extra-box"><strong style="font-size:1.2rem">${p1}</strong><span>Phase 1<br>Age 0–${cy1}</span></div><div class="extra-box"><strong style="font-size:1.2rem">${p2}</strong><span>Phase 2<br>Age ${cy1}–${cy2}</span></div><div class="extra-box"><strong style="font-size:1.2rem">${p3}</strong><span>Phase 3<br>Age ${cy2}–${cy3}</span></div><div class="extra-box"><strong style="font-size:1.2rem">${p4}</strong><span>Phase 4<br>Age ${cy3}+</span></div></div><div style="margin-top:.5rem;font-size:.75rem;color:var(--muted)">Click any phase number to see its full interpretation below.</div>`; showResult('pin_res',p1,'Current/First Pinnacle'); }
+  },
+
+  challenge: { title:'Challenge Numbers (4 Obstacles)', icon:'⚔️', cat:'cycles', desc:'Four life challenges that shape your growth and character.',
+    render:()=>`<p class="modal-subtitle">Challenge Numbers reveal the four primary obstacles or lessons you must face and master. Unlike Pinnacles (opportunities), Challenges point to areas of growth.</p>${fRow([fDate('ch_dob','Date of Birth')])}${fBtn('Find My Life Challenges','calc_challenge()')}${resDiv('ch_res')}`,
+    calc:()=>{ const dob=getVal('ch_dob'); if(!dob)return; const [y,m,d]=dob.split('-').map(Number); const c1=Math.abs(reduceNoMaster(d)-reduceNoMaster(m)),c2=Math.abs(reduceNoMaster(d)-reduceNoMaster(digitSum(y))),c3=Math.abs(c1-c2),c4=Math.abs(reduceNoMaster(m)-reduceNoMaster(digitSum(y))); document.getElementById('ch_res').style.display='block'; document.getElementById('ch_res').innerHTML=`<div class="extra-grid"><div class="extra-box"><strong style="font-size:1.2rem">${c1}</strong><span>Challenge 1</span></div><div class="extra-box"><strong style="font-size:1.2rem">${c2}</strong><span>Challenge 2</span></div><div class="extra-box"><strong style="font-size:1.2rem">${c3}</strong><span>Challenge 3</span></div><div class="extra-box"><strong style="font-size:1.2rem">${c4}</strong><span>Challenge 4</span></div></div>`; showResult('ch_res',c3,'Main Life Challenge'); }
+  },
+
+  // ─── NAME NUMEROLOGY ──────────────────────────────────────────────────────
+  name_full: { title:'Full Name Analysis', icon:'✍️', cat:'name', desc:'Complete numerological profile — all five name numbers.',
+    render:()=>`<p class="modal-subtitle">Get all five core name numbers from your full birth name — Destiny, Soul Urge, Personality, Inner Dreams, and Name Numerology total.</p>${sysBadge()}${fRow([fText('nf_name','Full Birth Name','e.g. Rahul Kumar Sharma')])}${fBtn('Get Full Name Analysis','calc_name_full()')}${resDiv('nf_res')}`,
+    calc:()=>{ const n=getVal('nf_name'); if(!n.trim())return; const sys=activeSystem==='chaldean'?'chaldean':'pythagorean'; const dest=nameToNum(n,sys),soul=nameVowelNum(n,sys),pers=nameConsonantNum(n,sys),inner=reduceNum(dest+soul); document.getElementById('nf_res').style.display='block'; document.getElementById('nf_res').innerHTML=`<div class="extra-grid"><div class="extra-box"><strong>${dest}</strong><span>Destiny</span></div><div class="extra-box"><strong>${soul}</strong><span>Soul Urge</span></div><div class="extra-box"><strong>${pers}</strong><span>Personality</span></div><div class="extra-box"><strong>${inner}</strong><span>Inner Dreams</span></div></div>`; showResult('nf_res',dest,'Destiny / Expression Number'); }
+  },
+
+  name_compat: { title:'Name Compatibility', icon:'💑', cat:'name', desc:'Compare two names numerologically — are you aligned?',
+    render:()=>`<p class="modal-subtitle">Compare the numerological vibrations of two names to assess compatibility — in romance, business, or friendship.</p>${sysBadge()}${fRow([fText('nc_n1','First Name','Person 1 full name'),fText('nc_n2','Second Name','Person 2 full name')])}${fBtn('Check Name Compatibility','calc_name_compat()')}${resDiv('nc_res')}`,
+    calc:()=>{ const n1=getVal('nc_n1'),n2=getVal('nc_n2'); if(!n1||!n2)return; const sys=activeSystem==='chaldean'?'chaldean':'pythagorean'; const v1=nameToNum(n1,sys),v2=nameToNum(n2,sys),combined=reduceNum(v1+v2); const compat=DEEP[v1]?.compatibility||[]; const score=compat.includes(v2)?'High ✓':reduceNoMaster(v1)===reduceNoMaster(v2)?'Very High ✓✓':'Moderate'; document.getElementById('nc_res').style.display='block'; document.getElementById('nc_res').innerHTML=`<div class="extra-grid"><div class="extra-box"><strong>${v1}</strong><span>${n1.split(' ')[0]}</span></div><div class="extra-box"><strong>${v2}</strong><span>${n2.split(' ')[0]}</span></div><div class="extra-box"><strong style="font-size:.85rem;color:${score.includes('High')?'#34D399':'#F59E0B'}">${score}</strong><span>Compatibility</span></div><div class="extra-box"><strong>${combined}</strong><span>Combined</span></div></div>`; showResult('nc_res',combined,'Combined Name Energy'); }
+  },
+
+  name_correction: { title:'Name Correction Numerology', icon:'🔤', cat:'name', desc:'Check if your current name number aligns with your Life Path.',
+    render:()=>`<p class="modal-subtitle">Check whether your current name creates harmony or friction with your Life Path Number. A name that vibrates harmoniously with your Life Path amplifies your potential.</p>${sysBadge()}${fRow([fDate('ncor_dob','Date of Birth'),fText('ncor_name','Current Name You Use','Name used daily')])}${fBtn('Check Name Alignment','calc_name_correction()')}${resDiv('ncor_res')}`,
+    calc:()=>{ const dob=getVal('ncor_dob'),n=getVal('ncor_name'); if(!dob||!n)return; const sys=activeSystem==='chaldean'?'chaldean':'pythagorean'; const lp=dobToLP(dob),nameNum=nameToNum(n,sys); const harmonic=(DEEP[lp]?.compatibility||[]).includes(nameNum)||nameNum===lp; document.getElementById('ncor_res').style.display='block'; document.getElementById('ncor_res').innerHTML=`<div style="text-align:center;padding:.75rem;background:${harmonic?'rgba(52,211,153,0.1)':'rgba(244,63,94,0.08)'};border:1px solid ${harmonic?'rgba(52,211,153,0.3)':'rgba(244,63,94,0.2)'};border-radius:14px;margin-bottom:1rem"><div style="font-size:1.5rem">${harmonic?'✅':'⚠️'}</div><div style="font-weight:700;color:${harmonic?'#34D399':'#F87171'};font-size:.9rem">${harmonic?'Good Alignment':'Review Recommended'}</div><div style="font-size:.75rem;color:var(--muted);margin-top:.3rem">Life Path ${lp} + Name Number ${nameNum} = ${harmonic?'Harmonious':'Friction'}</div></div>`; showResult('ncor_res',nameNum,'Current Name Number'); }
+  },
+
+  baby_name: { title:'Baby Name Numerology', icon:'👶', cat:'name', desc:'Find the ideal name number for your baby.',
+    render:()=>`<p class="modal-subtitle">Analyse potential names for your baby. Enter the birth date and a candidate name to see if their name number harmonises with their Life Path. A harmonious combination supports their natural potential.</p>${fRow([fDate('bn_dob','Baby\'s Date of Birth'),fText('bn_name','Candidate Name','First + Last name')])}${fBtn('Analyse Baby Name','calc_baby_name()')}${resDiv('bn_res')}`,
+    calc:()=>{ const dob=getVal('bn_dob'),n=getVal('bn_name'); if(!dob||!n)return; const lp=dobToLP(dob),nameNum=nameToNum(n,'pythagorean'); const harmonic=(DEEP[lp]?.compatibility||[]).includes(nameNum)||nameNum===lp; document.getElementById('bn_res').style.display='block'; document.getElementById('bn_res').innerHTML=`<div class="extra-grid"><div class="extra-box"><strong>${lp}</strong><span>Life Path</span></div><div class="extra-box"><strong>${nameNum}</strong><span>Name Number</span></div><div class="extra-box"><strong style="color:${harmonic?'#34D399':'#F59E0B'}">${harmonic?'✅ Great':'⚠️ Review'}</strong><span>Match</span></div></div>`; showResult('bn_res',nameNum,'Baby Name Numerology'); }
+  },
+
+  business_name: { title:'Business Name Numerology', icon:'🏢', cat:'name', desc:'Find the luckiest name for your business.',
+    render:()=>`<p class="modal-subtitle">In numerology, Numbers 1, 5, and 9 are considered most powerful for business success. Numbers 8 brings financial discipline. Enter your proposed business name to check its vibration.</p>${sysBadge()}${fRow([fText('biz_name','Business Name','e.g. Sharma Enterprises')])}${fBtn('Check Business Name','calc_business_name()')}${resDiv('biz_res')}`,
+    calc:()=>{ const n=getVal('biz_name'); if(!n)return; const sys=activeSystem==='chaldean'?'chaldean':'pythagorean'; const num=nameToNum(n,sys); const power=[1,5,9,11,22].includes(num); document.getElementById('biz_res').style.display='block'; document.getElementById('biz_res').innerHTML=`<div style="text-align:center;padding:.6rem;background:${power?'rgba(245,158,11,0.08)':'rgba(255,255,255,0.03)'};border:1px solid ${power?'rgba(245,158,11,0.2)':'var(--border)'};border-radius:12px;margin-bottom:.75rem;font-size:.8rem;color:${power?'var(--gold)':'var(--muted)'}">${power?'⭐ Power Number for Business':'This name number carries specific business energy'}</div>`; showResult('biz_res',num,'Business Name Number'); }
+  },
+
+  // ─── LIFE INSIGHTS ─────────────────────────────────────────────────────────
+  hidden_passion: { title:'Hidden Passion Number', icon:'🔥', cat:'insights', desc:'Most repeated letters in your name reveal your deepest passion.',
+    render:()=>`<p class="modal-subtitle">The Hidden Passion Number is the letter value that appears most frequently in your full birth name. It reveals an intense, driving passion — often a hidden talent you may undervalue.</p>${fRow([fText('hp_name','Full Birth Name','e.g. Rahul Kumar Sharma')])}${fBtn('Reveal My Hidden Passion','calc_hidden_passion()')}${resDiv('hp_res')}`,
+    calc:()=>{ const n=getVal('hp_name'); if(!n)return; const counts={}; [...n.toUpperCase().replace(/[^A-Z]/g,'')].forEach(c=>{const v=letterVal(c,'pythagorean');if(v)counts[v]=(counts[v]||0)+1;}); const maxCount=Math.max(...Object.values(counts)); const num=+Object.entries(counts).filter(([,v])=>v===maxCount).sort(([a],[b])=>+b-+a)[0][0]; showResult('hp_res',num,'Hidden Passion Number',`<div style="font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:.75rem">Letter value ${num} appears ${maxCount} times in your name</div>`); }
+  },
+
+  balance: { title:'Balance Number', icon:'⚖️', cat:'insights', desc:'Initials of your name — how you handle emotional stress.',
+    render:()=>`<p class="modal-subtitle">Your Balance Number, derived from the initials of your name, reveals how you respond to challenges and crises — it is the energy you retreat to when life is difficult.</p>${fRow([fText('bal_name','Full Name (Initials used)','e.g. Rahul Kumar Sharma')])}${fBtn('Find My Balance Number','calc_balance()')}${resDiv('bal_res')}`,
+    calc:()=>{ const n=getVal('bal_name'); if(!n)return; const initials=n.trim().split(/\s+/).map(w=>w[0]).join(''); const num=reduceNum(initials.toUpperCase().split('').reduce((a,c)=>a+letterVal(c,'pythagorean'),0)||1); showResult('bal_res',num,'Balance Number',`<div style="font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:.75rem">Initials: ${initials.toUpperCase()}</div>`); }
+  },
+
+  cornerstone: { title:'Cornerstone Number', icon:'🧱', cat:'insights', desc:'The first letter of your name — your natural approach to life.',
+    render:()=>`<p class="modal-subtitle">The Cornerstone is the first letter of your first name. It describes your fundamental approach to opportunities, challenges, and life in general — your default mode.</p>${fRow([fText('cs_name','First Name','e.g. Rahul')])}${fBtn('Find My Cornerstone','calc_cornerstone()')}${resDiv('cs_res')}`,
+    calc:()=>{ const n=getVal('cs_name').trim(); if(!n)return; const first=n[0].toUpperCase(); const num=letterVal(first,'pythagorean'); showResult('cs_res',num,`Cornerstone Letter ${first}`,`<div style="text-align:center;font-family:'Cinzel',serif;font-size:2rem;color:var(--gold);margin-bottom:.75rem">${first}</div>`); }
+  },
+
+  capstone: { title:'Capstone Number', icon:'🎓', cat:'insights', desc:'Last letter of your name — how you complete things.',
+    render:()=>`<p class="modal-subtitle">The Capstone is the last letter of your first name. It describes how you finish what you start — your follow-through energy and how you approach endings and completions.</p>${fRow([fText('cap_name','First Name','e.g. Rahul')])}${fBtn('Find My Capstone','calc_capstone()')}${resDiv('cap_res')}`,
+    calc:()=>{ const n=getVal('cap_name').trim(); if(!n)return; const last=n.toUpperCase().replace(/[^A-Z]/g,'').slice(-1); const num=letterVal(last,'pythagorean'); showResult('cap_res',num,`Capstone Letter ${last}`,`<div style="text-align:center;font-family:'Cinzel',serif;font-size:2rem;color:var(--gold);margin-bottom:.75rem">${last}</div>`); }
+  },
+
+  karmic_debt: { title:'Karmic Debt Number', icon:'🔗', cat:'insights', desc:'Check if you carry 13, 14, 16, or 19 — karmic patterns to release.',
+    render:()=>`<p class="modal-subtitle">Karmic Debt Numbers (13, 14, 16, 19) appear when these specific totals arise before reduction. They indicate lessons from past lives that must be addressed in this lifetime — not as punishment, but as opportunities for deep growth.</p>${fRow([fDate('kd_dob','Date of Birth'),fText('kd_name','Full Birth Name (optional)','For name-based karmic debt')])}${fBtn('Check Karmic Debt','calc_karmic_debt()')}${resDiv('kd_res')}`,
+    calc:()=>{ const dob=getVal('kd_dob'); if(!dob)return; const [y,m,d]=dob.split('-').map(Number); const karmic=[13,14,16,19]; const rawLP=reduceNum(d)+reduceNum(m)+reduceNum(digitSum(y)); const found=[]; if(karmic.includes(reduceNum(d)+''+reduceNum(m)+reduceNum(digitSum(y))||0)){}; [reduceNum(d),reduceNum(m),reduceNum(digitSum(y)),rawLP].forEach(n=>{if(karmic.includes(n))found.push(n);}); const kNames={13:'Laziness to Effort',14:'Overindulgence to Balance',16:'Ego to Humility',19:'Selfishness to Service'}; document.getElementById('kd_res').style.display='block'; document.getElementById('kd_res').innerHTML=found.length?`<div style="margin-bottom:.75rem">${found.map(k=>`<div style="background:rgba(124,58,237,0.1);border:1px solid var(--border2);border-radius:10px;padding:.6rem 1rem;margin-bottom:.5rem;font-size:.82rem"><strong style="color:var(--purple2)">${k}</strong> — ${kNames[k]}</div>`).join('')}</div>You have Karmic Debt. This means these themes will repeatedly appear until the lesson is mastered.`:`<div style="text-align:center;padding:1rem;color:#34D399;font-weight:600">✓ No Karmic Debt numbers found in your birth date.</div>`; showResult('kd_res',reduceNum(rawLP),'Life Path from Karmic Analysis'); }
+  },
+
+  karmic_lesson: { title:'Karmic Lesson Numbers', icon:'📚', cat:'insights', desc:'Missing letter values in your name reveal lessons to learn.',
+    render:()=>`<p class="modal-subtitle">Karmic Lessons are the numbers 1–9 that are completely absent from your full birth name. These absences indicate areas of life where you feel weak or challenged — energies you need to consciously develop.</p>${fRow([fText('kl_name','Full Birth Name','e.g. Rahul Kumar Sharma')])}${fBtn('Find My Karmic Lessons','calc_karmic_lesson()')}${resDiv('kl_res')}`,
+    calc:()=>{ const n=getVal('kl_name'); if(!n)return; const present=new Set([...n.toUpperCase().replace(/[^A-Z]/g,'')].map(c=>letterVal(c,'pythagorean')).filter(Boolean)); const missing=[1,2,3,4,5,6,7,8,9].filter(x=>!present.has(x)); document.getElementById('kl_res').style.display='block'; document.getElementById('kl_res').innerHTML=`<div style="margin-bottom:.75rem"><div style="font-size:.75rem;color:var(--muted);margin-bottom:.5rem">Present: ${[...present].sort().join(', ')} &nbsp;|&nbsp; Missing: ${missing.length?missing.join(', '):'None'}</div>${missing.length?missing.map(m=>`<div style="background:rgba(244,63,94,0.08);border:1px solid rgba(244,63,94,0.15);border-radius:10px;padding:.5rem .85rem;margin-bottom:.4rem;font-size:.8rem"><strong style="color:#F87171">${m}</strong> — ${getInterp(m).title}: Area to consciously develop</div>`).join(''):'<div style="color:#34D399;font-weight:600;text-align:center;padding:.5rem">✓ All numbers present — well-rounded name!</div>'}</div>`; if(missing.length)showResult('kl_res',missing[0],'Primary Karmic Lesson'); }
+  },
+
+  // ─── LUCKY & PREDICTION ────────────────────────────────────────────────────
+  lucky_number: { title:'Lucky Number Calculator', icon:'🍀', cat:'lucky', desc:'Your personal lucky numbers derived from your birth date.',
+    render:()=>`<p class="modal-subtitle">Your Lucky Number is your Life Path Number — and its multiples are your power numbers. Use these in important decisions, contracts, travel dates, and life events.</p>${fRow([fDate('ln_dob','Date of Birth')])}${fBtn('Find My Lucky Numbers','calc_lucky_number()')}${resDiv('ln_res')}`,
+    calc:()=>{ const dob=getVal('ln_dob'); if(!dob)return; const lp=dobToLP(dob); const d=getInterp(lp); document.getElementById('ln_res').style.display='block'; document.getElementById('ln_res').innerHTML=`<div class="lucky-grid"><div class="lucky-item"><div class="lucky-item-label">Primary Lucky Number</div><div class="lucky-item-val" style="font-size:1.5rem;font-family:'Cinzel',serif;color:var(--gold)">${lp}</div></div><div class="lucky-item"><div class="lucky-item-label">Lucky Number Series</div><div class="lucky-item-val">${d.luckyNums.join(', ')}</div></div><div class="lucky-item"><div class="lucky-item-label">Lucky Days</div><div class="lucky-item-val">${d.luckyDays.join(', ')}</div></div><div class="lucky-item"><div class="lucky-item-label">Ruling Planet</div><div class="lucky-item-val">${d.planet}</div></div></div>`; showResult('ln_res',lp,'Life Path / Lucky Number'); }
+  },
+
+  lucky_color: { title:'Lucky Color by Birth Date', icon:'🎨', cat:'lucky', desc:'Your personal lucky colors based on your Life Path.',
+    render:()=>`<p class="modal-subtitle">Colors carry vibrational frequencies. Your lucky colors align with your Life Path Number's ruling planet and amplify your natural energy when worn, used in décor, or featured in important spaces.</p>${fRow([fDate('lc_dob','Date of Birth')])}${fBtn('Find My Lucky Colors','calc_lucky_color()')}${resDiv('lc_res')}`,
+    calc:()=>{ const dob=getVal('lc_dob'); if(!dob)return; const lp=dobToLP(dob); const d=getInterp(lp); document.getElementById('lc_res').style.display='block'; document.getElementById('lc_res').innerHTML=`<div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem">${d.luckyColors.map(c=>`<div style="display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:.6rem 1rem"><div style="width:28px;height:28px;border-radius:8px;background:${c.hex};border:1px solid rgba(255,255,255,0.1)"></div><span style="font-size:.85rem;color:var(--white)">${c.name}</span></div>`).join('')}</div>`; showResult('lc_res',lp,'Life Path (Color Source)'); }
+  },
+
+  lucky_day: { title:'Lucky Day Calculator', icon:'📆', cat:'lucky', desc:'Your luckiest days of the week and ruling planet.',
+    render:()=>`<p class="modal-subtitle">Each number is ruled by a planetary energy that governs certain days of the week. Your lucky days are those governed by your Life Path planet and compatible planets.</p>${fRow([fDate('ld_dob','Date of Birth')])}${fBtn('Find My Lucky Days','calc_lucky_day()')}${resDiv('ld_res')}`,
+    calc:()=>{ const dob=getVal('ld_dob'); if(!dob)return; const lp=dobToLP(dob); const d=getInterp(lp); document.getElementById('ld_res').style.display='block'; document.getElementById('ld_res').innerHTML=`<div class="lucky-grid"><div class="lucky-item"><div class="lucky-item-label">Most Lucky Days</div><div class="lucky-item-val">${d.luckyDays.join(', ')}</div></div><div class="lucky-item"><div class="lucky-item-label">Ruling Planet</div><div class="lucky-item-val">${d.planet}</div></div></div>`; showResult('ld_res',lp,'Life Path Number (Day Source)'); }
+  },
+
+  lucky_direction: { title:'Lucky Direction (Vastu)', icon:'🧭', cat:'lucky', desc:'Auspicious directions for home, office, and sleep.',
+    render:()=>`<p class="modal-subtitle">In Vastu Shastra integrated with numerology, your Life Path number determines your most auspicious directions for sleeping, sitting, and entering your home or office. Aligning with these directions is believed to enhance success, health, and harmony.</p>${fRow([fDate('ldir_dob','Date of Birth')])}${fBtn('Find My Lucky Directions','calc_lucky_direction()')}${resDiv('ldir_res')}`,
+    calc:()=>{ const dob=getVal('ldir_dob'); if(!dob)return; const lp=dobToLP(dob); const dirs={1:{main:'East',sleep:'South head',office:'East facing'},2:{main:'North-West',sleep:'South head',office:'North facing'},3:{main:'North-East',sleep:'East head',office:'East facing'},4:{main:'West',sleep:'South head',office:'West facing'},5:{main:'All directions',sleep:'East head',office:'North facing'},6:{main:'South-East',sleep:'South head',office:'East facing'},7:{main:'North',sleep:'West head',office:'North facing'},8:{main:'West',sleep:'East head',office:'West facing'},9:{main:'South',sleep:'East head',office:'South facing'},11:{main:'North',sleep:'East head',office:'North facing'},22:{main:'East & West',sleep:'South head',office:'East facing'},33:{main:'North-East',sleep:'East head',office:'East facing'}}; const dir=dirs[lp]||dirs[reduceNoMaster(lp)]||dirs[1]; document.getElementById('ldir_res').style.display='block'; document.getElementById('ldir_res').innerHTML=`<div class="lucky-grid"><div class="lucky-item"><div class="lucky-item-label">Main Lucky Direction</div><div class="lucky-item-val">🧭 ${dir.main}</div></div><div class="lucky-item"><div class="lucky-item-label">Sleeping Direction</div><div class="lucky-item-val">🛏️ ${dir.sleep}</div></div><div class="lucky-item"><div class="lucky-item-label">Office Facing</div><div class="lucky-item-val">💼 ${dir.office}</div></div></div>`; showResult('ldir_res',lp,'Life Path / Vastu Number'); }
+  },
+
+  lucky_career: { title:'Lucky Career by Life Path', icon:'💼', cat:'lucky', desc:'Best-aligned career paths for your Life Path Number.',
+    render:()=>`<p class="modal-subtitle">Your Life Path Number indicates natural gifts and tendencies that align with specific careers. These are not limitations — they are fields where you are likely to find both success and deep fulfilment.</p>${fRow([fDate('lca_dob','Date of Birth')])}${fBtn('Find My Best Careers','calc_lucky_career()')}${resDiv('lca_res')}`,
+    calc:()=>{ const dob=getVal('lca_dob'); if(!dob)return; const lp=dobToLP(dob); const d=getInterp(lp); document.getElementById('lca_res').style.display='block'; document.getElementById('lca_res').innerHTML=`<div class="career-pills" style="margin-bottom:.75rem">${d.careers.map(c=>`<span class="career-pill">${c}</span>`).join('')}</div>`; showResult('lca_res',lp,'Life Path Number'); }
+  },
+
+  // ─── DAILY LIFE ─────────────────────────────────────────────────────────────
+  phone_number: { title:'Phone Number Numerology', icon:'📞', cat:'daily', desc:'The numerological energy of any phone number.',
+    render:()=>`<p class="modal-subtitle">Every phone number carries a specific numerological vibration. Business numbers ideally vibrate at 1 (authority), 5 (communication), 6 (service), or 8 (abundance). Personal numbers should align with your Life Path.</p>${fRow([fText('ph_num','Phone Number','e.g. 9876543210')])}${fBtn('Analyse Phone Number','calc_phone()')}${resDiv('ph_res')}`,
+    calc:()=>{ const n=getVal('ph_num').replace(/\D/g,''); if(!n)return; const num=reduceNum(n.split('').reduce((a,c)=>a+ +c,0)); showResult('ph_res',num,'Phone Number Vibration'); }
+  },
+
+  mobile_lucky: { title:'Mobile Number Lucky Checker', icon:'📱', cat:'daily', desc:'Is your mobile number compatible with your Life Path?',
+    render:()=>`<p class="modal-subtitle">Check whether your mobile number's vibration aligns harmoniously with your Life Path Number. A compatible mobile number is believed to support your energy throughout the day.</p>${fRow([fDate('ml_dob','Date of Birth'),fText('ml_num','Your Mobile Number','10-digit number')])}${fBtn('Check My Mobile Number','calc_mobile_lucky()')}${resDiv('ml_res')}`,
+    calc:()=>{ const dob=getVal('ml_dob'),n=getVal('ml_num').replace(/\D/g,''); if(!dob||!n)return; const lp=dobToLP(dob),mobileNum=reduceNum(n.split('').reduce((a,c)=>a+ +c,0)); const compat=(DEEP[lp]?.compatibility||[]).includes(mobileNum)||mobileNum===lp; document.getElementById('ml_res').style.display='block'; document.getElementById('ml_res').innerHTML=`<div style="text-align:center;padding:1rem;background:${compat?'rgba(52,211,153,0.08)':'rgba(244,63,94,0.06)'};border:1px solid ${compat?'rgba(52,211,153,0.25)':'rgba(244,63,94,0.2)'};border-radius:14px;margin-bottom:1rem"><div style="font-size:2rem">${compat?'✅':'⚠️'}</div><div style="font-weight:700;color:${compat?'#34D399':'#F87171'};margin:.25rem 0">${compat?'Lucky Number!':'Consider Reviewing'}</div><div style="font-size:.75rem;color:var(--muted)">Your Life Path ${lp} + Mobile Number ${mobileNum} = ${compat?'Compatible':'Friction detected'}</div></div>`; showResult('ml_res',mobileNum,'Mobile Number Vibration'); }
+  },
+
+  vehicle_number: { title:'Vehicle Number Numerology', icon:'🚗', cat:'daily', desc:'Lucky number analysis for your vehicle registration.',
+    render:()=>`<p class="modal-subtitle">Your vehicle number carries numerological energy. Sum all digits in your registration plate to find the vehicle's core number. Ideal vehicle numbers are 1 (leadership), 5 (smooth journeys), 6 (protection), or 9 (auspicious).</p>${fRow([fText('veh_num','Vehicle Registration Number','e.g. GJ 01 AB 1234')])}${fBtn('Analyse Vehicle Number','calc_vehicle()')}${resDiv('veh_res')}`,
+    calc:()=>{ const n=getVal('veh_num').replace(/\D/g,''); if(!n)return; const num=reduceNum(n.split('').reduce((a,c)=>a+ +c,0)); const good=[1,5,6,9].includes(num); document.getElementById('veh_res').style.display='block'; document.getElementById('veh_res').innerHTML=`<div style="text-align:center;padding:.6rem;background:${good?'rgba(245,158,11,0.08)':'rgba(255,255,255,0.03)'};border:1px solid ${good?'rgba(245,158,11,0.2)':'var(--border)'};border-radius:10px;margin-bottom:.75rem;font-size:.8rem;color:${good?'var(--gold)':'var(--muted)'}">${good?'⭐ Auspicious Vehicle Number':'Neutral vibration — check against your Life Path'}</div>`; showResult('veh_res',num,'Vehicle Number Vibration'); }
+  },
+
+  house_number: { title:'House Number Numerology', icon:'🏠', cat:'daily', desc:'The energy and personality of your home.',
+    render:()=>`<p class="modal-subtitle">Your house number defines the home's energy and the life themes it encourages. Numbers 2, 6, and 9 are considered nurturing and family-friendly. Number 1 supports independence. Number 8 attracts material abundance.</p>${fRow([fText('hn_num','House / Flat Number','e.g. 42 or 7B (use only digits)')])}${fBtn('Analyse House Number','calc_house_number()')}${resDiv('hn_res')}`,
+    calc:()=>{ const n=getVal('hn_num').replace(/\D/g,''); if(!n)return; const num=reduceNum(n.split('').reduce((a,c)=>a+ +c,0)); const themes={1:'Independence, self-development, ambition',2:'Family, harmony, nurturing, partnerships',3:'Creativity, joy, social energy, entertainment',4:'Structure, hard work, security, discipline',5:'Change, freedom, adventure, frequent visitors',6:'Love, family warmth, beauty, responsibility',7:'Solitude, spirituality, introspection, research',8:'Wealth attraction, power, business success',9:'Humanitarianism, healing, wisdom, letting go',11:'Spiritual awakening, intuition, inspiration',22:'Ambitious legacy building, community impact',33:'Healing sanctuary, unconditional love, service'}; document.getElementById('hn_res').style.display='block'; document.getElementById('hn_res').innerHTML=`<div style="background:rgba(124,58,237,0.08);border:1px solid var(--border2);border-radius:12px;padding:.85rem;font-size:.82rem;color:var(--text);margin-bottom:.75rem"><strong style="color:var(--purple2)">House ${num} Theme:</strong> ${themes[num]||themes[reduceNoMaster(num)]||themes[1]}</div>`; showResult('hn_res',num,'House Number'); }
+  },
+
+  // ─── COMPATIBILITY ─────────────────────────────────────────────────────────
+  compatibility: { title:'Relationship Compatibility', icon:'💕', cat:'compat', desc:'Compare two Life Path Numbers for romantic compatibility.',
+    render:()=>`<p class="modal-subtitle">Compare two Life Path Numbers to assess romantic compatibility. Numerology compatibility is one factor — always combine with real-world communication and values.</p>${fRow([fDate('cp1_dob','Person 1 Birth Date'),fDate('cp2_dob','Person 2 Birth Date')])}${fBtn('Calculate Compatibility','calc_compatibility()')}${resDiv('cp_res')}`,
+    calc:()=>{ const d1=getVal('cp1_dob'),d2=getVal('cp2_dob'); if(!d1||!d2)return; const lp1=dobToLP(d1),lp2=dobToLP(d2); const comp1=DEEP[lp1]?.compatibility||[]; const comp2=DEEP[lp2]?.compatibility||[]; const mutual=comp1.includes(lp2)&&comp2.includes(lp1); const partial=comp1.includes(lp2)||comp2.includes(lp1); const score=mutual?92:partial?74:55; document.getElementById('cp_res').style.display='block'; document.getElementById('cp_res').innerHTML=`<div style="text-align:center;padding:1rem;background:rgba(124,58,237,0.08);border:1px solid var(--border2);border-radius:16px;margin-bottom:1rem"><div style="font-family:'Cinzel',serif;font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,var(--purple2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${score}%</div><div style="font-size:.78rem;color:var(--muted)">Life Path ${lp1} + Life Path ${lp2}</div><div style="margin-top:.5rem;font-size:.82rem;color:${score>80?'#34D399':score>65?'#F59E0B':'#F87171'};font-weight:600">${score>80?'Highly Compatible ✨':score>65?'Good Compatibility ✓':'Growth Opportunity'}</div></div><div class="extra-grid"><div class="extra-box"><strong>${lp1}</strong><span>Life Path 1<br>${getInterp(lp1).title}</span></div><div class="extra-box"><strong>${lp2}</strong><span>Life Path 2<br>${getInterp(lp2).title}</span></div></div>`; showResult('cp_res',lp1,'Life Path 1'); }
+  },
+
+  marriage_compat: { title:'Marriage Compatibility', icon:'💍', cat:'compat', desc:'Deep compatibility using Life Path, Destiny & names.',
+    render:()=>`<p class="modal-subtitle">Marriage compatibility analysis using both partners' Life Path and Destiny numbers for a comprehensive assessment. Enter full birth names and dates of birth.</p>${fRow([fDate('mc1_dob','Partner 1 DOB'),fText('mc1_name','Partner 1 Full Name','')])}${fRow([fDate('mc2_dob','Partner 2 DOB'),fText('mc2_name','Partner 2 Full Name','')])}${fBtn('Analyse Marriage Compatibility','calc_marriage_compat()')}${resDiv('mc_res')}`,
+    calc:()=>{ const d1=getVal('mc1_dob'),n1=getVal('mc1_name'),d2=getVal('mc2_dob'),n2=getVal('mc2_name'); if(!d1||!d2)return; const lp1=dobToLP(d1),lp2=dobToLP(d2); const dest1=n1?nameToNum(n1,'pythagorean'):lp1,dest2=n2?nameToNum(n2,'pythagorean'):lp2; const lpComp=(DEEP[lp1]?.compatibility||[]).includes(lp2)&&(DEEP[lp2]?.compatibility||[]).includes(lp1); const destComp=(DEEP[dest1]?.compatibility||[]).includes(dest2); const combined=reduceNum(lp1+lp2); const score=Math.min(95,60+(lpComp?20:0)+(destComp?15:0)+(lp1===lp2?10:0)); document.getElementById('mc_res').style.display='block'; document.getElementById('mc_res').innerHTML=`<div style="text-align:center;padding:1rem;background:rgba(124,58,237,0.08);border:1px solid var(--border2);border-radius:16px;margin-bottom:1rem"><div style="font-family:'Cinzel',serif;font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,var(--purple2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${score}%</div><div style="font-size:.78rem;color:var(--muted);margin-top:.25rem">Marriage Compatibility Score</div></div><div class="extra-grid"><div class="extra-box"><strong>${lp1}</strong><span>LP 1</span></div><div class="extra-box"><strong>${dest1}</strong><span>Destiny 1</span></div><div class="extra-box"><strong>${lp2}</strong><span>LP 2</span></div><div class="extra-box"><strong>${dest2}</strong><span>Destiny 2</span></div><div class="extra-box"><strong>${combined}</strong><span>Combined</span></div></div>`; showResult('mc_res',combined,'Combined Partnership Number'); }
+  },
+
+  friendship_compat: { title:'Friendship Compatibility', icon:'🤝', cat:'compat', desc:'How compatible are two people as friends?',
+    render:()=>`<p class="modal-subtitle">Assess the numerological compatibility between two people in a friendship context. Some numbers make deep, lasting friends; others may find connection through shared growth.</p>${fRow([fDate('fc1_dob','Person 1 DOB'),fDate('fc2_dob','Person 2 DOB')])}${fBtn('Check Friendship Match','calc_friendship_compat()')}${resDiv('fc_res')}`,
+    calc:()=>{ const d1=getVal('fc1_dob'),d2=getVal('fc2_dob'); if(!d1||!d2)return; const lp1=dobToLP(d1),lp2=dobToLP(d2); const compat=(DEEP[lp1]?.compatibility||[]).includes(lp2); const combined=reduceNum(lp1+lp2); const score=compat?85:lp1===lp2?90:65; document.getElementById('fc_res').style.display='block'; document.getElementById('fc_res').innerHTML=`<div style="text-align:center;padding:.75rem;margin-bottom:.75rem"><div style="font-family:'Cinzel',serif;font-size:2rem;font-weight:900;color:var(--purple2)">${score}%</div><div style="font-size:.75rem;color:var(--muted)">Friendship Compatibility · LP${lp1} + LP${lp2}</div></div>`; showResult('fc_res',combined,'Friendship Combined Number'); }
+  },
+
+  // ─── ADVANCED ─────────────────────────────────────────────────────────────
+  lo_shu: { title:'Lo Shu Grid Calculator', icon:'🔢', cat:'advanced', desc:'Ancient Chinese 3×3 birth date grid showing strengths and gaps.',
+    render:()=>`<p class="modal-subtitle">The Lo Shu Grid plots your birth date digits onto a 3×3 magic square (positions: 4,9,2 / 3,5,7 / 8,1,6). Numbers present indicate active energies; missing numbers reveal areas to develop. Used in both Chinese numerology and Vastu Shastra.</p>${fRow([fDate('ls_dob','Date of Birth')])}${fBtn('Generate My Lo Shu Grid','calc_lo_shu()')}${resDiv('ls_res')}`,
+    calc:()=>{ const dob=getVal('ls_dob'); if(!dob)return; const digits=dob.replace(/-/g,'').split('').map(Number).filter(d=>d>0&&d<10); const counts={1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}; digits.forEach(d=>{if(counts[d]!==undefined)counts[d]++;}); const missing=Object.entries(counts).filter(([,v])=>v===0).map(([k])=>+k); const positions=[[4,9,2],[3,5,7],[8,1,6]]; const cellHtml=(n)=>{ const c=counts[n]; const cls=c>0?'present':'missing'; return `<div class="lo-cell ${cls}"><div class="lo-cell-num">${n}</div><div class="lo-cell-dots">${Array(Math.min(c,4)).fill('<div class="lo-dot"></div>').join('')}</div></div>`; }; document.getElementById('ls_res').style.display='block'; document.getElementById('ls_res').innerHTML=`<div class="lo-shu-grid">${positions.flat().map(cellHtml).join('')}</div><div style="display:flex;gap:1rem;justify-content:center;font-size:.72rem;color:var(--muted);margin:.75rem 0"><span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--purple2);margin-right:4px;vertical-align:middle"></span>Present</span><span style="color:rgba(244,63,94,0.7)">□ Missing (${missing.length})</span></div>${missing.length?`<div style="font-size:.78rem;color:var(--muted);text-align:center">Missing numbers: ${missing.join(', ')} — areas to consciously develop</div>`:'<div style="font-size:.78rem;color:#34D399;text-align:center">✓ All numbers present — complete grid!</div>'}`; showResult('ls_res',reduceNum(digits.reduce((a,d)=>a+d,0)),'Lo Shu Grid Energy'); }
+  },
+
+  subconscious_self: { title:'Subconscious Self Number', icon:'🧠', cat:'advanced', desc:'How many 1–9 numbers appear in your name reveals your instinctive reactions.',
+    render:()=>`<p class="modal-subtitle">The Subconscious Self Number (1–9) is based on how many of the 9 single-digit numbers appear in your full birth name. It reveals how you instinctively react under pressure — your subconscious strength.</p>${fRow([fText('scs_name','Full Birth Name','e.g. Rahul Kumar Sharma')])}${fBtn('Find Subconscious Self','calc_subconscious()')}${resDiv('scs_res')}`,
+    calc:()=>{ const n=getVal('scs_name'); if(!n)return; const present=new Set([...n.toUpperCase().replace(/[^A-Z]/g,'')].map(c=>letterVal(c,'pythagorean')).filter(Boolean)); showResult('scs_res',present.size,'Subconscious Self Number',`<div style="font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:.75rem">${present.size} of 9 numbers represented in your name</div>`); }
+  },
+
+  rational_thought: { title:'Rational Thought Number', icon:'🎯', cat:'advanced', desc:'First name + birth day reveals your thinking style.',
+    render:()=>`<p class="modal-subtitle">The Rational Thought Number combines your first name value with your birth day to reveal how your mind works — your logical thinking style and problem-solving approach.</p>${fRow([fText('rt_name','First Name Only','e.g. Rahul'),fDate('rt_dob','Date of Birth')])}${fBtn('Find Rational Thought Number','calc_rational_thought()')}${resDiv('rt_res')}`,
+    calc:()=>{ const n=getVal('rt_name'),dob=getVal('rt_dob'); if(!n||!dob)return; const d=+dob.split('-')[2]; const num=reduceNum(nameToNum(n,'pythagorean')+reduceNum(d)); showResult('rt_res',num,'Rational Thought Number'); }
+  },
+
+  expr_bridge: { title:'Expression Bridge Number', icon:'🌉', cat:'advanced', desc:'Gap between Life Path and Destiny — the bridge to walk.',
+    render:()=>`<p class="modal-subtitle">The Expression Bridge Number reveals the gap between who you naturally are (Life Path) and what you are here to achieve (Destiny). Crossing this bridge is your central life challenge and growth path.</p>${fRow([fDate('eb_dob','Date of Birth'),fText('eb_name','Full Birth Name','')])}${fBtn('Calculate Expression Bridge','calc_expr_bridge()')}${resDiv('eb_res')}`,
+    calc:()=>{ const dob=getVal('eb_dob'),n=getVal('eb_name'); if(!dob||!n)return; const lp=dobToLP(dob),dest=nameToNum(n,'pythagorean'); const bridge=Math.abs(reduceNoMaster(lp)-reduceNoMaster(dest)); document.getElementById('eb_res').style.display='block'; document.getElementById('eb_res').innerHTML=`<div class="extra-grid"><div class="extra-box"><strong>${lp}</strong><span>Life Path</span></div><div class="extra-box"><strong style="font-size:.9rem;color:var(--gold)">→${bridge}←</strong><span>Bridge</span></div><div class="extra-box"><strong>${dest}</strong><span>Destiny</span></div></div>`; if(bridge>0)showResult('eb_res',bridge,'Expression Bridge Number'); else{document.getElementById('eb_res').innerHTML+=`<div style="text-align:center;padding:.75rem;color:#34D399;font-weight:600;font-size:.85rem">✓ No bridge — your natural self and destiny are perfectly aligned!</div>`;} }
+  },
+
+  soul_urge_bridge: { title:'Soul Urge Bridge Number', icon:'💞', cat:'advanced', desc:'Gap between your inner desires and outer personality.',
+    render:()=>`<p class="modal-subtitle">The Soul Urge Bridge Number shows the gap between your deepest desires (Soul Urge from vowels) and how you present yourself (Personality from consonants). Closing this gap brings authenticity and inner peace.</p>${fRow([fText('sub_name','Full Birth Name','e.g. Rahul Kumar Sharma')])}${fBtn('Calculate Soul Bridge','calc_soul_bridge()')}${resDiv('sub_res')}`,
+    calc:()=>{ const n=getVal('sub_name'); if(!n)return; const soul=nameVowelNum(n,'pythagorean'),pers=nameConsonantNum(n,'pythagorean'); const bridge=Math.abs(reduceNoMaster(soul)-reduceNoMaster(pers)); document.getElementById('sub_res').style.display='block'; document.getElementById('sub_res').innerHTML=`<div class="extra-grid"><div class="extra-box"><strong>${soul}</strong><span>Soul Urge</span></div><div class="extra-box"><strong style="color:var(--gold)">${bridge}</strong><span>Bridge</span></div><div class="extra-box"><strong>${pers}</strong><span>Personality</span></div></div>`; if(bridge>0)showResult('sub_res',bridge,'Soul Urge Bridge Number'); else{document.getElementById('sub_res').innerHTML+=`<div style="text-align:center;padding:.75rem;color:#34D399;font-weight:600;font-size:.85rem">✓ No bridge — you are completely authentic in your self-expression!</div>`;} }
+  }
+
+};
+
+// Expose calc functions globally
+window.calc_life_path=()=>CALCS.life_path.calc();
+window.calc_destiny=()=>CALCS.destiny.calc();
+window.calc_soul_urge=()=>CALCS.soul_urge.calc();
+window.calc_personality=()=>CALCS.personality.calc();
+window.calc_birthday=()=>CALCS.birthday.calc();
+window.calc_maturity=()=>CALCS.maturity.calc();
+window.calc_attitude=()=>CALCS.attitude.calc();
+window.calc_personal_year=()=>CALCS.personal_year.calc();
+window.calc_personal_month=()=>CALCS.personal_month.calc();
+window.calc_personal_day=()=>CALCS.personal_day.calc();
+window.calc_pinnacle=()=>CALCS.pinnacle.calc();
+window.calc_challenge=()=>CALCS.challenge.calc();
+window.calc_name_full=()=>CALCS.name_full.calc();
+window.calc_name_compat=()=>CALCS.name_compat.calc();
+window.calc_name_correction=()=>CALCS.name_correction.calc();
+window.calc_baby_name=()=>CALCS.baby_name.calc();
+window.calc_business_name=()=>CALCS.business_name.calc();
+window.calc_hidden_passion=()=>CALCS.hidden_passion.calc();
+window.calc_balance=()=>CALCS.balance.calc();
+window.calc_cornerstone=()=>CALCS.cornerstone.calc();
+window.calc_capstone=()=>CALCS.capstone.calc();
+window.calc_karmic_debt=()=>CALCS.karmic_debt.calc();
+window.calc_karmic_lesson=()=>CALCS.karmic_lesson.calc();
+window.calc_lucky_number=()=>CALCS.lucky_number.calc();
+window.calc_lucky_color=()=>CALCS.lucky_color.calc();
+window.calc_lucky_day=()=>CALCS.lucky_day.calc();
+window.calc_lucky_direction=()=>CALCS.lucky_direction.calc();
+window.calc_lucky_career=()=>CALCS.lucky_career.calc();
+window.calc_phone=()=>CALCS.phone_number.calc();
+window.calc_mobile_lucky=()=>CALCS.mobile_lucky.calc();
+window.calc_vehicle=()=>CALCS.vehicle_number.calc();
+window.calc_house_number=()=>CALCS.house_number.calc();
+window.calc_compatibility=()=>CALCS.compatibility.calc();
+window.calc_marriage_compat=()=>CALCS.marriage_compat.calc();
+window.calc_friendship_compat=()=>CALCS.friendship_compat.calc();
+window.calc_lo_shu=()=>CALCS.lo_shu.calc();
+window.calc_subconscious=()=>CALCS.subconscious_self.calc();
+window.calc_rational_thought=()=>CALCS.rational_thought.calc();
+window.calc_expr_bridge=()=>CALCS.expr_bridge.calc();
+window.calc_soul_bridge=()=>CALCS.soul_urge_bridge.calc();
+
+// ── CARD DATA ────────────────────────────────────────────────────────────────
+const GROUPS = [
+  { cat:'core', label:'🌟 Core Numbers', ids:['life_path','destiny','soul_urge','personality','birthday','maturity','attitude'] },
+  { cat:'cycles', label:'📅 Personal Cycles', ids:['personal_year','personal_month','personal_day','pinnacle','challenge'] },
+  { cat:'name', label:'✍️ Name Numerology', ids:['name_full','name_compat','name_correction','baby_name','business_name'] },
+  { cat:'insights', label:'🔍 Life Insights', ids:['hidden_passion','balance','cornerstone','capstone','karmic_debt','karmic_lesson'] },
+  { cat:'lucky', label:'🍀 Lucky & Prediction', ids:['lucky_number','lucky_color','lucky_day','lucky_direction','lucky_career'] },
+  { cat:'daily', label:'📱 Daily Life', ids:['phone_number','mobile_lucky','vehicle_number','house_number'] },
+  { cat:'compat', label:'💕 Compatibility', ids:['compatibility','marriage_compat','friendship_compat'] },
+  { cat:'advanced', label:'🔮 Advanced', ids:['lo_shu','subconscious_self','rational_thought','expr_bridge','soul_urge_bridge'] }
+];
+
+function renderGrid(filter) {
+  const grid = document.getElementById('calcGrid');
+  const filtered = filter === 'all' ? GROUPS : GROUPS.filter(g => g.cat === filter);
+  grid.innerHTML = filtered.map(group => {
+    const cards = group.ids.map(id => {
+      const c = CALCS[id]; if (!c) return '';
+      return `<div class="calc-card" onclick="openCalc('${id}')">
+        <span class="calc-card-icon">${c.icon}</span>
+        <h3>${c.title}</h3>
+        <p>${c.desc}</p>
+        <span class="calc-card-arrow">→</span>
+      </div>`;
+    }).join('');
+    return `<div class="calc-group-title">${group.label}</div><div class="calc-grid">${cards}</div>`;
+  }).join('');
+}
+renderGrid('all');
+
+function filterCalcs(btn, cat) {
+  document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid(cat);
+}
+
+// ── MODAL ────────────────────────────────────────────────────────────────────
+function openCalc(id) {
+  const c = CALCS[id]; if (!c) return;
+  const inner = document.getElementById('modalInner');
+  inner.innerHTML = `<div class="modal-title">${c.icon} ${c.title}</div>${c.render()}`;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.getElementById('modalOverlay').scrollTop = 0;
+}
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+function handleOverlayClick(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
+
+// ── MEANING GRID ─────────────────────────────────────────────────────────────
+function renderMeaningGrid() {
+  const grid = document.getElementById('meaningGrid');
+  const nums = [1,2,3,4,5,6,7,8,9,11,22,33];
+  grid.innerHTML = nums.map(n => {
+    const d = DEEP[n];
+    return `<div class="meaning-card">
+      <div class="meaning-card-top">
+        <div class="meaning-num-badge">${n}</div>
+        <div><h3>${d.title}</h3><div class="m-archetype">${d.archetype}</div></div>
+      </div>
+      <div class="meaning-card-body">
+        <p>${d.overview.slice(0, 180)}...</p>
+        <div class="m-traits">${d.traits.map(t=>`<span class="m-trait">${t}</span>`).join('')}</div>
+        ${d.strengths.slice(0,2).map(s=>`<div class="m-strength-row">${s}</div>`).join('')}
+        ${d.weaknesses.slice(0,1).map(w=>`<div class="m-weakness-row">${w}</div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+renderMeaningGrid();
+
+// ── FAQ ───────────────────────────────────────────────────────────────────────
+function toggleFaq(btn) {
+  btn.closest('.faq-item').classList.toggle('open');
+}
+
+// ── SCROLL HELPER ─────────────────────────────────────────────────────────────
+function scrollTo(id) {
+  const el = document.querySelector(id);
+  if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+// ── KEYBOARD ─────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
 <!-- Adsterra Native Banner -->
 <div style="max-width:1200px;margin:2rem auto;padding:0 clamp(1rem,5vw,4rem);">
   <script async="async" data-cfasync="false" src="https://amoralstern.com/52420230d50f70ca51d08a707c3ddf51/invoke.js"></script>
   <div id="container-52420230d50f70ca51d08a707c3ddf51"></div>
 </div>
-
 <!-- Adsterra Popunder (Adult ads OFF) -->
 <script src="https://amoralstern.com/28/64/6d/28646d193d396bad20c6dcf087cd8d46.js"></script>
 </body></html>
